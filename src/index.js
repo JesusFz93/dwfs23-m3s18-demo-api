@@ -3,8 +3,6 @@ const express = require("express");
 const app = express();
 const PORT = 4000;
 
-const { users } = require("./database/db");
-
 // 2. MIDDLEWARES - PODERES
 app.use(express.json());
 
@@ -15,67 +13,8 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/usuarios", (req, res) => {
-  return res.json({
-    ok: true,
-    msg: "Usuarios obtenidos",
-    data: users,
-  });
-});
-
-app.post("/usuarios", (req, res) => {
-  const { user_name, password } = req.body;
-
-  const user = {
-    id: "3",
-    user_name: user_name,
-    password: password,
-  };
-
-  users.push(user);
-
-  return res.json({
-    ok: true,
-    msg: "Usuario creado",
-    data: user,
-  });
-});
-
-app.put("/usuarios/:id", (req, res) => {
-  const { id } = req.params;
-  const { user_name, password } = req.body;
-
-  const user = users.find((user) => {
-    return user.id === id;
-  });
-
-  user.user_name = user_name;
-  user.password = password;
-
-  return res.json({
-    ok: true,
-    msg: "Usuario actualizado",
-    data: user,
-  });
-});
-
-app.delete("/usuarios/:id", (req, res) => {
-  const { id } = req.params;
-
-  const user = users.find((user) => {
-    return user.id === id;
-  });
-
-  const indice = users.indexOf(user);
-
-  users.splice(indice, 1);
-
-  return res.json({
-    ok: true,
-    msg: "Usuario eliminado",
-    data: user,
-  });
-});
+app.use("/usuarios", require("./routes/users.routes"));
+app.use("/materias", require("./routes/materias.routes"));
 
 // 4. SERVIDOR EJECUTANDO
 app.listen(PORT, () => {
