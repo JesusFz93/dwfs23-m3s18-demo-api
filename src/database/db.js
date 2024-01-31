@@ -11,6 +11,16 @@ const users = [
   },
 ];
 
+const peliculas = [
+  {
+    id: "1",
+    title: "El senor de los anillos",
+    year: "2001",
+    price: 45,
+  },
+];
+
 module.exports = {
   users,
+  peliculas,
 };

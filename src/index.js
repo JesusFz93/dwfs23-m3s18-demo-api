@@ -18,6 +18,7 @@ app.get("/", (req, res) => {
 
 app.use("/usuarios", require("./routes/users.routes"));
 app.use("/materias", require("./routes/materias.routes"));
+app.use("/peliculas", require("./routes/peliculas.routes"));
 
 // 4. SERVIDOR EJECUTANDO
 app.listen(PORT, () => {
